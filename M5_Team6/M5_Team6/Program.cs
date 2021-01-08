@@ -6,7 +6,9 @@ namespace M5_Team6
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Empleado emple1 = new Empleado();
+
+            Console.WriteLine(emple1.Tipo);
         }
     }
 }

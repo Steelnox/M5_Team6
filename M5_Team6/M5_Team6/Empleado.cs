@@ -4,19 +4,30 @@ using System.Text;
 
 namespace M5_Team6
 {
-    class Empleado
+    public class Empleado
     {
-        private string id;
-        private string nombre;
-        private double salario_mes;
-        private int reduccion;
+        protected string id;
+        protected string nombre;
+        protected double salario_mes;
+        protected int reduccion;
+        protected enum tipo_empleado
+        {
+            Manager,
+            Boss,
+            Employee,
+            Volunteer
+        }
 
+        protected string tipo = tipo_empleado.Boss.ToString();
+
+        #region Constructores
         public Empleado()
         {
             this.id = GenerarId();
             this.nombre = "";
             this.salario_mes = 0;
             this.reduccion = 0;
+            this.tipo = tipo_empleado.Employee.ToString();
         }
 
         public Empleado(string nombre)
@@ -38,8 +49,16 @@ namespace M5_Team6
             this.id = GenerarId();
             this.reduccion = reduccion;
         }
+        #endregion
+        #region getset
+        public string Id { get => id; set => id = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public double Salario_mes { get => salario_mes; set => salario_mes = value; }
+        public int Reduccion { get => reduccion; set => reduccion = value; }
+        public string Tipo { get => tipo; set => tipo = value; }
+        #endregion
 
-        public string GenerarId()
+        private string GenerarId()
         {
             int aleatorio_generado;
             char letra;
@@ -127,10 +146,7 @@ namespace M5_Team6
             return Convert.ToString(aleatorio_generado) + letra;
         }
 
-        public string Id { get => id; set => id = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
-        public double Salario_mes { get => salario_mes; set => salario_mes = value; }
-        public int Reduccion { get => reduccion; set => reduccion = value; }
+        
 
 
     }
