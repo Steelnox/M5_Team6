@@ -10,18 +10,23 @@ namespace M5_Team6
         {
             this.id = emple.Id;
             this.nombre = emple.Nombre;
-            this.salario_mes = emple.Salario_mes;
+            this.salario_bruto_mes = emple.Salario_bruto_mes;
             this.reduccion = 0.15f;
 
             CalculoSalario();
         }
 
 
-        public override void CalculoSalario()
+        protected override void CalculoSalario()
         {
-            incremento = salario_mes * reduccion;
-            salario_mes -= incremento;
-            salario_mes = Math.Round(salario_mes, 2);
+            incremento = salario_bruto_mes * reduccion;
+            salario_bruto_mes -= incremento;
+            salario_bruto_mes = Math.Round(salario_bruto_mes, 2);
+
+            CalcularIRPF();
+
+            CalcularSueldoAnual();
+
         }
 
 

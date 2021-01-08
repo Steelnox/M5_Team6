@@ -8,9 +8,13 @@ namespace M5_Team6
     {
         protected string id;
         protected string nombre;
-        protected double salario_mes;
+        protected double salario_neto_mes;
+        protected double salario_bruto_mes;
+        protected double salario_neto_anual;
+        protected double salario_bruto_anual;
         protected float reduccion;
         protected double incremento;
+        protected float irpf;
 
 
         #region Constructores
@@ -18,28 +22,40 @@ namespace M5_Team6
         {
             this.id = GenerarId();
             this.nombre = "";
-            this.salario_mes = 0;
+            this.salario_bruto_mes = 0;
+            this.salario_neto_mes = 0;
+            this.salario_bruto_anual = 0;
+            this.salario_neto_anual = 0;
         }
 
         public Empleado(string nombre)
         {
             this.id = GenerarId();
             this.nombre = nombre;
-            this.salario_mes = 0;
+            this.salario_bruto_mes = 0;
+            this.salario_neto_mes = 0;
+            this.salario_bruto_anual = 0;
+            this.salario_neto_anual = 0;
         }
 
-        public Empleado(string nombre, double salario_mes)
+        public Empleado(string nombre, double salario_neto_mes)
         {
             this.id = GenerarId();
-            this.salario_mes = salario_mes;
+            this.salario_bruto_mes = salario_neto_mes;
             this.nombre = nombre;
+            this.salario_neto_mes = 0;
+            this.salario_bruto_anual = 0;
+            this.salario_neto_anual = 0;
         }
         #endregion
         #region getset
         public string Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
-        public double Salario_mes { get => salario_mes; set => salario_mes = value; }
+        public double Salario_neto_mes { get => salario_neto_mes; set => salario_neto_mes = value; }
         public float Reduccion { get => reduccion; set => reduccion = value; }
+        public double Salario_bruto_mes { get => salario_bruto_mes; set => salario_bruto_mes = value; }
+        public double Salario_neto_anual { get => salario_neto_anual; set => salario_neto_anual = value; }
+        public double Salario_bruto_anual { get => salario_bruto_anual; set => salario_bruto_anual = value; }
         #endregion
 
         private string GenerarId()
@@ -130,17 +146,42 @@ namespace M5_Team6
             return Convert.ToString(aleatorio_generado) + letra;
         }
 
-        public virtual void CalculoSalario()
+        protected virtual void CalculoSalario()
         {
 
         }
 
         public override string ToString()
         {
-            return id.ToString() + " / " + salario_mes.ToString() + " / " + nombre.ToString();
+            return id.ToString() + " / "  + nombre.ToString() + " / El sueldo neto mensual es " + salario_neto_mes.ToString() + " euros / El sueldo bruto mensual es " + salario_bruto_mes.ToString() + " euros / El sueldo neto anual es " + salario_neto_anual.ToString() + " euros / El sueldo bruto anual es " + salario_bruto_anual.ToString();
+        }
+
+
+        protected void CalcularIRPF()
+        {
+            double irpf_sueldo = 0;
+            irpf_sueldo = salario_bruto_mes * irpf;
+            salario_neto_mes = salario_bruto_mes - irpf_sueldo;
+
+            salario_neto_mes = Math.Round(salario_neto_mes, 2);
 
         }
 
+        protected virtual void CalcularSueldoAnual()
+        {
+            double incremento_anual = 0;
+
+            salario_bruto_anual = salario_bruto_mes * 12;
+
+            salario_neto_anual = salario_neto_mes * 12;
+
+            incremento_anual = salario_neto_anual * 0.1;
+
+            salario_neto_anual += incremento_anual;
+
+            salario_neto_anual = Math.Round(salario_neto_anual, 2);
+
+        }
     }
 
 }
