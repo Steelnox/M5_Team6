@@ -10,15 +10,8 @@ namespace M5_Team6
         protected string nombre;
         protected double salario_mes;
         protected int reduccion;
-        protected enum tipo_empleado
-        {
-            Manager,
-            Boss,
-            Employee,
-            Volunteer
-        }
+        protected double incremento;
 
-        protected string tipo = tipo_empleado.Boss.ToString();
 
         #region Constructores
         public Empleado()
@@ -27,7 +20,6 @@ namespace M5_Team6
             this.nombre = "";
             this.salario_mes = 0;
             this.reduccion = 0;
-            this.tipo = tipo_empleado.Employee.ToString();
         }
 
         public Empleado(string nombre)
@@ -55,7 +47,6 @@ namespace M5_Team6
         public string Nombre { get => nombre; set => nombre = value; }
         public double Salario_mes { get => salario_mes; set => salario_mes = value; }
         public int Reduccion { get => reduccion; set => reduccion = value; }
-        public string Tipo { get => tipo; set => tipo = value; }
         #endregion
 
         private string GenerarId()
@@ -146,31 +137,12 @@ namespace M5_Team6
             return Convert.ToString(aleatorio_generado) + letra;
         }
 
-        public void CalculoSalario()
+        public virtual void CalculoSalario()
         {
-            double incremento;
-            switch (tipo)
-            {
-                case "Boss":
-                    incremento = salario_mes * 0.5;
-                    salario_mes += incremento;
-                    break;
-                case "Manager":
-                    incremento = salario_mes * 0.10;
-                    salario_mes += incremento;
-                    break;
-                case "Employee":
-                    incremento = salario_mes * 0.15;
-                    salario_mes -= incremento;
-                    break;
-                case "Volunteer":
-                    salario_mes = 0;
-                    break;
-                default:
-                    break;
-            }
+             
         }
 
 
     }
+
 }

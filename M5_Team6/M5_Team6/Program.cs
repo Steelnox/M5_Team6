@@ -6,9 +6,10 @@ namespace M5_Team6
     {
         static void Main(string[] args)
         {
-            Empleado emple1 = new Empleado();
+            Manager manage = new Manager();
+            Console.WriteLine(manage.Id);
 
-            Console.WriteLine(emple1.Tipo);
+            
         }
     }
 }
