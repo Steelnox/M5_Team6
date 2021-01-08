@@ -22,6 +22,12 @@ namespace M5_Team6
             incremento = salario_mes * reduccion;
             salario_mes += incremento;
             salario_mes = Math.Round(salario_mes, 2);
+
+            if (salario_mes <= 3000 || salario_mes >= 5000)
+            {
+                Console.WriteLine("El salario de este empleado se cambiará al mínimo de esta categoría");
+                salario_mes = 3001;
+            }
         }
 
     }
