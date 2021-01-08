@@ -146,7 +146,30 @@ namespace M5_Team6
             return Convert.ToString(aleatorio_generado) + letra;
         }
 
-        
+        public void CalculoSalario()
+        {
+            double incremento;
+            switch (tipo)
+            {
+                case "Boss":
+                    incremento = salario_mes * 0.5;
+                    salario_mes += incremento;
+                    break;
+                case "Manager":
+                    incremento = salario_mes * 0.10;
+                    salario_mes += incremento;
+                    break;
+                case "Employee":
+                    incremento = salario_mes * 0.15;
+                    salario_mes -= incremento;
+                    break;
+                case "Volunteer":
+                    salario_mes = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
 
 
     }
