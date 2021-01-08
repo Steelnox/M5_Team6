@@ -9,7 +9,7 @@ namespace M5_Team6
         protected string id;
         protected string nombre;
         protected double salario_mes;
-        protected int reduccion;
+        protected float reduccion;
         protected double incremento;
 
 
@@ -19,7 +19,6 @@ namespace M5_Team6
             this.id = GenerarId();
             this.nombre = "";
             this.salario_mes = 0;
-            this.reduccion = 0;
         }
 
         public Empleado(string nombre)
@@ -27,26 +26,20 @@ namespace M5_Team6
             this.id = GenerarId();
             this.nombre = nombre;
             this.salario_mes = 0;
-            this.reduccion = 0;
         }
 
-        public Empleado(string nombre, double salario_mes) : this(nombre)
+        public Empleado(string nombre, double salario_mes)
         {
             this.id = GenerarId();
             this.salario_mes = salario_mes;
-        }
-
-        public Empleado(string nombre, double salario_mes, int reduccion) : this(nombre, salario_mes)
-        {
-            this.id = GenerarId();
-            this.reduccion = reduccion;
+            this.nombre = nombre;
         }
         #endregion
         #region getset
         public string Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public double Salario_mes { get => salario_mes; set => salario_mes = value; }
-        public int Reduccion { get => reduccion; set => reduccion = value; }
+        public float Reduccion { get => reduccion; set => reduccion = value; }
         #endregion
 
         private string GenerarId()
@@ -139,9 +132,14 @@ namespace M5_Team6
 
         public virtual void CalculoSalario()
         {
-             
+
         }
 
+        public override string ToString()
+        {
+            return id.ToString() + " / " + salario_mes.ToString() + " / " + nombre.ToString();
+
+        }
 
     }
 
